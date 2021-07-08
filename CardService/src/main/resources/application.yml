@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: CardService
+  main:
+    banner-mode: 'off'
+
+server:
+  port: 8803
+

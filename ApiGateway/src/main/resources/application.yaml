@@ -1,0 +1,43 @@
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: ApiGateway
+  cloud:
+    gateway:
+      routes:
+        - id: account_route
+          uri: lb://AccountService
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=2
+        - id: client_route
+          uri: lb://ClientService
+          predicates:
+            - Path=/client/**
+          filters:
+            - StripPrefix=2
+        - id: card_route
+          uri: lb://CardService
+          predicates:
+            - Path=/card/**
+          filters:
+            - StripPrefix=2
+        - id: processing_route
+          uri: lb://ProcessingService
+          predicates:
+            - Path=/processing/**
+          filters:
+            - StripPrefix=2
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+server:
+  port: 9090
+
+management:
+  endpoints.web.exposure.include: 'gateway, info, health, env'

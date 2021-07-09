@@ -82,10 +82,11 @@
     </build>
 
     <modules>
+        <module>ApiGateway</module>
+        <module>Eureka</module>
         <module>AccountService</module>
         <module>CardService</module>
         <module>ClientService</module>
-        <module>Eureka</module>
         <module>ProcessingService</module>
     </modules>
 

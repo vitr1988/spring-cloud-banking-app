@@ -1,6 +1,9 @@
 ### Create client
 GET http://localhost:8801/create?name=Test
 
+### Create client
+GET http://localhost:9090/client/create?name=Test
+
 ### Get client info
 GET http://localhost:8801/get
 

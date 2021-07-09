@@ -84,6 +84,7 @@
     <modules>
         <module>ApiGateway</module>
         <module>Eureka</module>
+        <module>ConfigServer</module>
         <module>AccountService</module>
         <module>CardService</module>
         <module>ClientService</module>

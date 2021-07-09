@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ConfigServer
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///${user.home}/config-repo
+#          uri: https://github.com/vitr1988/config-repo/
+          search-paths: {application}
+
+server:
+  port: 8600
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+
+

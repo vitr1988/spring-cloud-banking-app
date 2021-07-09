@@ -26,3 +26,56 @@ eureka:
     register-with-eureka: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+resilience4j.circuitbreaker:
+  instances:
+    backendA:
+      registerHealthIndicator: true
+      slidingWindowSize: 100
+    backendB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+resilience4j.retry:
+  instances:
+    account:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - java.lang.IllegalArgumentException
+
+resilience4j.bulkhead:
+  instances:
+    account:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 10
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    account:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+
+resilience4j.ratelimiter:
+  instances:
+    account:
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+
+resilience4j.timelimiter:
+  instances:
+    account:
+      timeoutDuration: 2s
+      cancelRunningFuture: true

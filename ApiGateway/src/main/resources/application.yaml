@@ -40,4 +40,10 @@ server:
   port: 9090
 
 management:
-  endpoints.web.exposure.include: 'gateway, info, health, env'
+  endpoints.web.exposure.include: 'gateway, prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

@@ -16,3 +16,11 @@ eureka:
     service-url:
       default-zone: http://localhost:8762/eureka
 
+management:
+  endpoints.web.exposure.include: 'prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

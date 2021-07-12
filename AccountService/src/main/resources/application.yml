@@ -79,3 +79,12 @@ resilience4j.timelimiter:
     account:
       timeoutDuration: 2s
       cancelRunningFuture: true
+
+management:
+  endpoints.web.exposure.include: 'prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

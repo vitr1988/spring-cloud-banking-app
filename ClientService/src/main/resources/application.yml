@@ -3,6 +3,9 @@ spring:
     name: ClientService
   main:
     banner-mode: 'off'
+  sleuth:
+    sampler:
+      probability: 0.2
 
 server:
   port: 8801

@@ -1,0 +1,85 @@
+### Get token for client service
+POST http://localhost:8500/uaa/oauth/token?grant_type=password&username=client&password=client
+Authorization: Basic client secret
+
+### Get token for client service
+GET http://localhost:8801/get/1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYyMDM1NjIsInVzZXJfbmFtZSI6ImNsaWVudCIsImF1dGhvcml0aWVzIjpbIkNMSUVOVF9SRUFEIiwiQ0xJRU5UX1dSSVRFIiwiQ0FSRF9SRUFEIiwiQUNDT1VOVF9SRUFEIl0sImp0aSI6IjhBYzdpb1FsWTNEX29ZY1BHc0F1QWd0SUdBNCIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbIm9wZW5pZCJdfQ.GaxZC7sCd-Yxe5EoJy66U4EyRkAElwgWPpONA-m03LyPremUzKk0SLu2NoHwIWaC0yTTD60p2DnAS0yj_t6EYUHQ6GPqHNHMMveH4rlF2ymfOixhlzgCwK3cWVLiaxVBXtplyPJwV2ATTSPrZKaw9cm6FfLqAw88dC0gt7w0NG7DgWm0q4z72TjBtJkhUjSuqJzTzB7q_HNUXTiPMpqnIXN-wFW-aSCvl0Yll9SLPGupgVNzwp82VKq_fsZwNmy1MrZPTEeo3lgpgJ8qT7UI3s8f3OwSipS0lBh173FK3umzTy7EHnXbNo1uvK6kVeD1UmC7dZTvLOWfJiIGNEDzCw
+
+### Get token for client service
+GET http://localhost:8801/create?name=Test
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYyMDM1NjIsInVzZXJfbmFtZSI6ImNsaWVudCIsImF1dGhvcml0aWVzIjpbIkNMSUVOVF9SRUFEIiwiQ0xJRU5UX1dSSVRFIiwiQ0FSRF9SRUFEIiwiQUNDT1VOVF9SRUFEIl0sImp0aSI6IjhBYzdpb1FsWTNEX29ZY1BHc0F1QWd0SUdBNCIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbIm9wZW5pZCJdfQ.GaxZC7sCd-Yxe5EoJy66U4EyRkAElwgWPpONA-m03LyPremUzKk0SLu2NoHwIWaC0yTTD60p2DnAS0yj_t6EYUHQ6GPqHNHMMveH4rlF2ymfOixhlzgCwK3cWVLiaxVBXtplyPJwV2ATTSPrZKaw9cm6FfLqAw88dC0gt7w0NG7DgWm0q4z72TjBtJkhUjSuqJzTzB7q_HNUXTiPMpqnIXN-wFW-aSCvl0Yll9SLPGupgVNzwp82VKq_fsZwNmy1MrZPTEeo3lgpgJ8qT7UI3s8f3OwSipS0lBh173FK3umzTy7EHnXbNo1uvK6kVeD1UmC7dZTvLOWfJiIGNEDzCw
+
+### Get token for card service
+
+POST http://localhost:8500/uaa/oauth/token?grant_type=password&username=card&password=card
+Authorization: Basic client secret
+
+> {%
+ client.global.set("card_token", response.body.access_token);
+ %}
+
+### Use token to generate a card number
+
+GET http://localhost:8803/create
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYyMDMyNjYsInVzZXJfbmFtZSI6ImNhcmQiLCJhdXRob3JpdGllcyI6WyJDQVJEX1dSSVRFIiwiQUNDT1VOVF9SRUFEIl0sImp0aSI6IkxBWmRaWWI4RTFvYV83WjFXZXFNUGgzdUFxMCIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbIm9wZW5pZCJdfQ.HMg-143hHWMVuFqlEs-q6_Z9kol6mVd-rVmU4R2F3dCxswf_gst8eSo-Uk4ds3vc5oC9TaGw2WZJOh7hyNHO6oImTSOzTKX17NqnokW0GEQ8FVmtlYOuEOzyuQjB-ZHwnWG0kaZbG19tdmwPkFpiuxr89zxcC3YmGqkaQwkJums1eriuloWvuoM17IZ5Lz9b553k0xxbalQnfmgmLNa8c3phUMWNvoFkd6Q111QmfzFvELNYhsL1Ia_bUl9HGzuVaYj7t3juW2kwInFLpFOoJXvNP7bgVcFyyHGIdeg8Vz5W1xZ2zgrSNOpbHaH10gjFHpZyejKfktU85_SWiE5WBA
+
+### Get token for account
+
+POST http://localhost:8500/uaa/oauth/token?grant_type=password&username=account&password=account
+Authorization: Basic client secret
+
+> {%
+ client.global.set("account_token", response.body.access_token);
+ %}
+
+
+### Create account for the client
+GET http://localhost:8802/create?client_id=7
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYyMDMyMzYsInVzZXJfbmFtZSI6ImFjY291bnQiLCJhdXRob3JpdGllcyI6WyJBQ0NPVU5UX1dSSVRFIiwiQUNDT1VOVF9QUk9DRVNTIiwiQUNDT1VOVF9SRUFEIl0sImp0aSI6IjJrWXFpYmFMdURZTlp0T1Vwem5UU3Z0b2Q5ayIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbIm9wZW5pZCJdfQ.EdhosnK-U7Zi9ydlGqhhmZqkhE_WjWQs50hYQuoYnPHpxGF9OkGtpWB_9qraSJXlkRM_qneei-43x9rmJ0HBetaHtrcdQ3cQa-iFwo_6bAzckPmFyihIIcpSJvMAK61znUNkw645I4cTgAB8w1HJAsn6mbL2zJ1DTqXyNCr0f1hYXx-r6aZiNw5FOxgbRpKGcQLsEr8qzEMX_zc_p18rJ3fKXo6uYUSkyqbZwLBuwlYyLxWwbaQX2v4u0USBo8v7696z0FgB7gu4bv9bvxjT-BesjpRaP6FiA4lLRQWyKPOR1F1G6rUjfCcNnJe4GyKHGBbkbLPdzxHW1V3YnBW42g
+
+### Retrieve id of the account
+GET http://localhost:8802/get/7
+Accept: application/json
+Authorization: Bearer {{card_token}}
+
+> {%
+  client.global.set("accountId", response.body[0].id);
+%}
+
+### Put some money to the account
+GET http://localhost:8802/fund/{{accountId}}?sum=1000
+Authorization: Bearer {{account_token}}
+
+### Get token for processing service
+
+POST http://localhost:8500/uaa/oauth/token?grant_type=password&username=processing&password=processing
+Authorization: Basic client secret
+
+> {%
+ client.global.set("processing_token", response.body.access_token);
+ %}
+
+### Generate credit card
+GET http://localhost:8804/issue/{{accountId}}
+Accept: application/json
+Authorization: Bearer {{processing_token}}
+
+> {%
+  client.global.set("cardNumber", response.body);
+%}
+
+### Spend some money
+GET http://localhost:8804/checkout/{{cardNumber}}?sum=100
+Authorization: Bearer {{processing_token}}
+
+### Retrieve info of the account
+GET http://localhost:8802/get/7
+Accept: application/json
+Authorization: Bearer {{account_token}}
+
+### Retrieve card number for the account
+GET http://localhost:8804/get?account_id={{accountId}}
+Authorization: Bearer {{processing_token}}
+
+

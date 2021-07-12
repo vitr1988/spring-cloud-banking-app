@@ -7,6 +7,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,21 +23,25 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    @PreAuthorize("hasAuthority('ACCOUNT_WRITE')")
     @GetMapping("/create")
     public Long createAccount(@RequestParam("client_id") Long clientId) {
         return accountService.createAccount(clientId);
     }
 
+    @PreAuthorize("hasAuthority('ACCOUNT_PROCESS')")
     @GetMapping("/fund/{id}")
     public void depositAccount(@PathVariable Long id, @RequestParam BigDecimal sum) {
         accountService.depositAccount(id, sum);
     }
 
+    @PreAuthorize("hasAuthority('ACCOUNT_PROCESS')")
     @GetMapping("/checkout/{id}")
     public void withdrawAccount(@PathVariable Long id, @RequestParam BigDecimal sum) {
         accountService.withdrawAccount(id, sum);
     }
 
+    @PreAuthorize("hasAuthority('ACCOUNT_READ')")
     @GetMapping("/get/{id}")
     public Optional<Account> getAccount(@PathVariable Long id) {
         return accountService.findById(id);

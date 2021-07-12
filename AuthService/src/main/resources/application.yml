@@ -1,0 +1,9 @@
+spring:
+  application.name: AuthService
+  main:
+    banner-mode: 'off'
+
+server:
+  port: 8500
+  servlet:
+    context-path: /uaa

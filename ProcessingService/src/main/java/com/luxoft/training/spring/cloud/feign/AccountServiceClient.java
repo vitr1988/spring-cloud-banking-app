@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@FeignClient(name = "AccountService", fallback = AccountServiceFallback.class)
+@FeignClient(name = "AccountService"
+        , fallback = AccountServiceFallback.class
+        , configuration = AccountServiceClientConfiguration.class)
 public interface AccountServiceClient {
 
     @GetMapping("/get/{id}")

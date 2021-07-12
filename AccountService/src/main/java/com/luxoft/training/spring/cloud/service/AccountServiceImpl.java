@@ -6,6 +6,7 @@ import com.luxoft.training.spring.cloud.feign.ClientServiceClient;
 import com.luxoft.training.spring.cloud.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

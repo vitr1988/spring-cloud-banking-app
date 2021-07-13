@@ -48,8 +48,8 @@ Authorization: Bearer {{card_token}}
 %}
 
 ### Put some money to the account
-GET http://localhost:8802/fund/{{accountId}}?sum=1000
-Authorization: Bearer {{account_token}}
+GET http://localhost:8802/fund/1?sum=1000
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjYyMTgwNTgsInVzZXJfbmFtZSI6ImFjY291bnQiLCJhdXRob3JpdGllcyI6WyJBQ0NPVU5UX1dSSVRFIiwiQUNDT1VOVF9QUk9DRVNTIiwiQUNDT1VOVF9SRUFEIl0sImp0aSI6IjFJWGFTNXk3dXpSLWlabnU1QkxWRUVkeVp5USIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbIm9wZW5pZCJdfQ.TwzLAWKMik15tF07s74nuENCSKGkxXvkvEX3qFiKXoSJFrmW4qz5A-m6aLAIVL1-y39SuA7IWZXXGsumtTIQetAJEb-PWzuZLdfegPAjRGFseXhHjBoOlS0GvxPXuDlTFldyvNCiyt6f5eIXXInqdWeC-BxOnp2sMTganieIY8BFtUHx3fiQghzsMuUODu65P2VvQMfeHxaYhte3DatOA8XPhh-iEAR-K13rkSsaAL6oyai2cabzl0z5e8G4ZljASaliNHKNJhgk29pWoOxBHLlrBn6FWSUgLK0Agdy1g9wj9LAemOFf_em4KxqN7K17sWNkQNJZwUwn7r2b8QrTvQ
 
 ### Get token for processing service
 

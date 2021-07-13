@@ -1,11 +1,14 @@
 package com.luxoft.training.spring.cloud.controller;
 
+import com.luxoft.training.spring.cloud.FundEvent;
 import com.luxoft.training.spring.cloud.domain.Account;
 import com.luxoft.training.spring.cloud.service.AccountService;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.bus.BusBridge;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +22,11 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequiredArgsConstructor
+@RefreshScope
 public class AccountController {
 
     private final AccountService accountService;
+    private final BusBridge busClient;
 
     @PreAuthorize("hasAuthority('ACCOUNT_WRITE')")
     @GetMapping("/create")
@@ -32,7 +37,11 @@ public class AccountController {
     @PreAuthorize("hasAuthority('ACCOUNT_PROCESS')")
     @GetMapping("/fund/{id}")
     public void depositAccount(@PathVariable Long id, @RequestParam BigDecimal sum) {
-        accountService.depositAccount(id, sum);
+        try {
+            accountService.depositAccount(id, sum);
+        } finally {
+            busClient.send(new FundEvent("AccountService", "HistoryService", sum));
+        }
     }
 
     @PreAuthorize("hasAuthority('ACCOUNT_PROCESS')")

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: HistoryService
+  main:
+    banner-mode: 'off'
+
+server:
+  port: 8806
+
+management:
+  port: 9806
+  security:
+    enabled: false
